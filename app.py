@@ -61,7 +61,7 @@ def get_binky_response(user_input):
 
 def speak_binky(text):
     """Binky의 목소리로 텍스트 읽기 (TTS)"""
-    response = openai.Audio.speech.create(model="tts-1", voice=voice_option, input=text)
+    response = openai.audio.speech.create(model="tts-1", voice=voice_option, input=text)
     return response.content
 
 def extract_text_from_pdf(file):
