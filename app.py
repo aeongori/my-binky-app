@@ -38,7 +38,7 @@ if not api_key:
     st.warning("먼저 사이드바에 API Key를 입력해주세요, darling!")
     st.stop()
 
-openai.api_key = api_key
+client = openai.OpenAI(api_key=api_key)
 
 # --- 핵심 로직 함수 ---
 
@@ -61,7 +61,8 @@ def get_binky_response(user_input):
 
 def speak_binky(text):
     """Binky의 목소리로 텍스트 읽기 (TTS)"""
-    response = openai.audio.speech.create(model="tts-1", voice=voice_option, input=text)
+    # openai.audio.speech.create 대신 아래처럼 client를 사용합니다.
+    response = client.audio.speech.create(model="tts-1", voice=voice_option, input=text)
     return response.content
 
 def extract_text_from_pdf(file):
